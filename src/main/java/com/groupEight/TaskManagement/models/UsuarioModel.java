@@ -23,4 +23,9 @@ public class UsuarioModel {
     private Permissoes permissoes;
     private UsuarioStatus status;
 
+    /*@ManyToOne
+    @JoinColumn(name = "equipe_id")
+    private Equipe equipe; */
+
+
 }
