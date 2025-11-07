@@ -4,49 +4,47 @@ import com.groupEight.TaskManagement.enuns.TipoPrioridade;
 import com.groupEight.TaskManagement.enuns.TipoStatus;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
-@Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 @Builder
-@Table(name = "tb_tarefas")
+@Table(name= "tb_tarefas")
+@Entity
 public class Tarefa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "titulo", nullable = false)
+    @Column(name = "titulo")
     private String titulo;
 
-    @Column(name = "descricao", nullable = false)
+    @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "proprietario_tarefa", nullable = false)
-    private Usuario usuario;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
+    private UsuarioModel usuario;
 
-    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private TipoStatus status;
 
-    @Column(name = "prioridade", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "prioridade")
     private TipoPrioridade prioridade;
 
-    @Column(name = "data_criacao", nullable = false)
+    @Column(name = "data_criacao")
     private LocalDateTime dataCriacao;
 
-    @Column(name = "data_inicio", nullable = false)
+    @Column(name = "data_inicio")
     private LocalDateTime dataInicio;
 
-    @Column(name = "data_prevista", nullable = false)
+    @Column(name = "data_prevista")
     private LocalDateTime dataPrevista;
 
-    @Column(name = "data_fim", nullable = false)
+    @Column(name = "data_fim")
     private LocalDateTime dataFim;
 }
