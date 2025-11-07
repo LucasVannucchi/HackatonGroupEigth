@@ -13,6 +13,7 @@ public record UsuarioRequest(
         String email,
         String senha,
         String cargo,
+        Permissoes permissoes,
         UsuarioStatus status
 ) {
 }
