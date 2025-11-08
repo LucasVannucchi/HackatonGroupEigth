@@ -31,7 +31,7 @@ public class Equipe {
     @NotNull
     private Setor setor;
 
-    //Ajustar relação posteriormente
+    @OneToMany(mappedBy = "equipe", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UsuarioModel> usuarios;
 
 }

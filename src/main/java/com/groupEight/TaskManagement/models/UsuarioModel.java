@@ -16,7 +16,7 @@ import java.util.UUID;
 public class UsuarioModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private UUID id;
 
@@ -43,9 +43,9 @@ public class UsuarioModel {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tarefa> tarefa;
 
-    /*@ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "equipe_id")
-    private Equipe equipe; */
+    private Equipe equipe;
 
 
 }
