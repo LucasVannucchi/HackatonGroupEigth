@@ -3,6 +3,7 @@ package com.groupEight.TaskManagement.services;
 import com.groupEight.TaskManagement.DTO.requests.UsuarioLoginRequestDTO;
 
 import com.groupEight.TaskManagement.DTO.requests.usuario.UsuarioRequestDto;
+import com.groupEight.TaskManagement.enuns.Permissoes;
 import com.groupEight.TaskManagement.enuns.UsuarioStatus;
 import com.groupEight.TaskManagement.models.UsuarioModel;
 import com.groupEight.TaskManagement.repository.UsuarioRepository;
@@ -35,15 +36,50 @@ public class AuthenticationService {
         return token;
     }
 
-    public void cadastrar(UsuarioRequestDto request){
+    public void cadastrarFuncionario(UsuarioRequestDto request){
         UsuarioModel usuario = UsuarioModel.builder()
                 .nome(request.nome())
                 .email(request.email())
                 .senha(new BCryptPasswordEncoder().encode(request.senha()))
-                .permissoes(request.permissoes())
+                .permissoes(Permissoes.Funcionario)
                 .cargo(request.cargo())
                 .status(UsuarioStatus.Ativo)
                 .build();
         usuarioRepository.save(usuario);
     }
+    public void cadastrarSupervisor(UsuarioRequestDto request){
+        UsuarioModel usuario = UsuarioModel.builder()
+                .nome(request.nome())
+                .email(request.email())
+                .senha(new BCryptPasswordEncoder().encode(request.senha()))
+                .permissoes(Permissoes.Supervisor)
+                .cargo(request.cargo())
+                .status(UsuarioStatus.Ativo)
+                .build();
+        usuarioRepository.save(usuario);
+    }
+    public void cadastrarGestor(UsuarioRequestDto request){
+        UsuarioModel usuario = UsuarioModel.builder()
+                .nome(request.nome())
+                .email(request.email())
+                .senha(new BCryptPasswordEncoder().encode(request.senha()))
+                .permissoes(Permissoes.Gestor)
+                .cargo(request.cargo())
+                .status(UsuarioStatus.Ativo)
+                .build();
+        usuarioRepository.save(usuario);
+    }
+    public void cadastrarMaster(UsuarioRequestDto request){
+        UsuarioModel usuario = UsuarioModel.builder()
+                .nome(request.nome())
+                .email(request.email())
+                .senha(new BCryptPasswordEncoder().encode(request.senha()))
+                .permissoes(Permissoes.Master)
+                .cargo(request.cargo())
+                .status(UsuarioStatus.Ativo)
+                .build();
+        usuarioRepository.save(usuario);
+    }
+
+
 }

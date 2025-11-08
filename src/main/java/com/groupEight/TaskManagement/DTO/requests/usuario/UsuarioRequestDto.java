@@ -7,7 +7,6 @@ public record UsuarioRequestDto(
         @NotNull String nome,
         @NotNull String email,
         @NotNull String senha,
-        @NotNull String cargo,
-        @NotNull Permissoes permissoes
+        @NotNull String cargo
 ) {
 }

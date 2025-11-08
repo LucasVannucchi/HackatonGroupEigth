@@ -28,10 +28,31 @@ public class AuthenticationController {
         return ResponseEntity.ok().body(authenticationService.login(loginRequestDTO));
     }
 
-    @PostMapping("/cadastrar")
-    public ResponseEntity cadastrar(@RequestBody UsuarioRequestDto request){
+    @PostMapping("/cadastrar/funcionario")
+    public ResponseEntity cadastrarFuncionario(@RequestBody UsuarioRequestDto request){
         log.info("Senha: " + request.senha());
-        authenticationService.cadastrar(request);
+        authenticationService.cadastrarFuncionario(request);
+        URI uri = UriComponentsBuilder.fromPath("/auth/cadastrar").buildAndExpand().toUri();
+        return ResponseEntity.created(uri).build();
+    }
+    @PostMapping("/cadastrar/gestor")
+    public ResponseEntity cadastrarGestor(@RequestBody UsuarioRequestDto request){
+        log.info("Senha: " + request.senha());
+        authenticationService.cadastrarGestor(request);
+        URI uri = UriComponentsBuilder.fromPath("/auth/cadastrar").buildAndExpand().toUri();
+        return ResponseEntity.created(uri).build();
+    }
+    @PostMapping("/cadastrar/supervisor")
+    public ResponseEntity cadastrarSupervisor(@RequestBody UsuarioRequestDto request){
+        log.info("Senha: " + request.senha());
+        authenticationService.cadastrarSupervisor(request);
+        URI uri = UriComponentsBuilder.fromPath("/auth/cadastrar").buildAndExpand().toUri();
+        return ResponseEntity.created(uri).build();
+    }
+    @PostMapping("/cadastrar/master")
+    public ResponseEntity cadastrarMaster(@RequestBody UsuarioRequestDto request){
+        log.info("Senha: " + request.senha());
+        authenticationService.cadastrarMaster(request);
         URI uri = UriComponentsBuilder.fromPath("/auth/cadastrar").buildAndExpand().toUri();
         return ResponseEntity.created(uri).build();
     }

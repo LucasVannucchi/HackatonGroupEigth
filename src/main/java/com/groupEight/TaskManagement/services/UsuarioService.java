@@ -15,10 +15,12 @@ import com.groupEight.TaskManagement.models.UsuarioModel;
 import com.groupEight.TaskManagement.repository.TarefaRepository;
 import com.groupEight.TaskManagement.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collections;
 import java.util.List;
@@ -74,8 +76,12 @@ public class UsuarioService {
         UsuarioModel usuario = getUsuarioModel(userDetails);
 
         if(usuario.getPermissoes()==Permissoes.Gestor){
-
             UsuarioModel usuarioModel = (UsuarioModel) usuarioRepository.findByEmail(requestFerias.email()).orElseThrow(()->new EntityNotFoundException("Usuario não encontrado"));
+
+            if(usuarioModel.getTarefa().isEmpty()){
+                throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Usuário não possui tarefas.");
+            }
+
             List<TipoStatus> listaStatus = List.of(TipoStatus.Em_Andamento,TipoStatus.Pendente);
 
             List<Tarefa> listaTarefas = tarefaRepository.findTarefasByUsuarioAndDataPrevistaBetweenAndStatusIn(usuarioModel.getId(),requestFerias.dataInicio(),requestFerias.dataFinal(),listaStatus);

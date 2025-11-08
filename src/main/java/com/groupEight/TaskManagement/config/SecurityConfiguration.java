@@ -35,7 +35,11 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorization -> authorization
                         // Endpoints públicos
                         .requestMatchers("/h2-console/**").permitAll()
-                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/auth/cadastrar/master").permitAll()
+                        .requestMatchers("/auth/cadastrar/gestor").hasRole("Master")
+                        .requestMatchers("/auth/cadastrar/supervisor").hasRole("Gestor")
+                        .requestMatchers("/auth/cadastrar/funcionario").hasRole("Supervisor")
                         // Endpoints necessários para o Swagger funcionar
                         .requestMatchers(
                                 "/v3/api-docs/**",
