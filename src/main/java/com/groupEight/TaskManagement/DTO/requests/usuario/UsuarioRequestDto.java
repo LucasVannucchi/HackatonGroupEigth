@@ -1,12 +1,12 @@
 package com.groupEight.TaskManagement.DTO.requests.usuario;
 
 import com.groupEight.TaskManagement.enuns.Permissoes;
+import jakarta.validation.constraints.NotNull;
 
 public record UsuarioRequestDto(
-        String nome,
-        String email,
-        String senha,
-        String cargo,
-        Permissoes permissoes
+        @NotNull String nome,
+        @NotNull String email,
+        @NotNull String senha,
+        @NotNull String cargo
 ) {
 }

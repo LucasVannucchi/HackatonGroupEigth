@@ -34,9 +34,10 @@ public class Equipe {
     @NotNull
     private Setor setor;
 
+    @Column(name = "status_equipe")
     private StatusEquipe statusEquipe;
 
-    //Ajustar relação posteriormente
+    @OneToMany(mappedBy = "equipe")
     private List<UsuarioModel> usuarios;
 
     public void adicionarUsuario(UsuarioModel usuario) {

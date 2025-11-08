@@ -6,11 +6,13 @@ import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseDto;
 import com.groupEight.TaskManagement.models.Equipe;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Component
 public class EquipeMapper {
 
     UsuarioMapper usuarioMapper;
@@ -25,6 +27,7 @@ public class EquipeMapper {
                 equipe.getId(),
                 equipe.getNome(),
                 equipe.getSetor(),
+                equipe.getStatusEquipe(),
                 usuariosResponseDto
         );
         return dto;

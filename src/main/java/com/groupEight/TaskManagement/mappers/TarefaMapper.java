@@ -41,6 +41,8 @@ public class TarefaMapper {
                     tarefa.getUsuario().getId(),
                     tarefa.getUsuario().getNome(),
                     tarefa.getUsuario().getEmail(),
+                    tarefa.getUsuario().getSenha(),
+                    tarefa.getUsuario().getCargo(),
                     tarefa.getUsuario().getStatus(),
                     tarefa.getUsuario().getPermissoes()
             );
@@ -50,7 +52,7 @@ public class TarefaMapper {
                 .id(tarefa.getId())
                 .titulo(tarefa.getTitulo())
                 .descricao(tarefa.getDescricao())
-                .responsavel(usuarioResponseDto) // <- pode ser null
+                .responsavel(usuarioResponseDto)
                 .status(tarefa.getStatus())
                 .prioridade(tarefa.getPrioridade())
                 .dataCriacao(tarefa.getDataCriacao())

@@ -51,8 +51,14 @@ public class UsuarioModel implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.permissoes == Permissoes.Master){
+            return List.of(new SimpleGrantedAuthority("ROLE_Master"));
+        }
         if (this.permissoes == Permissoes.Gestor){
-            return List.of(new SimpleGrantedAuthority("ROLE_Gestor"), new SimpleGrantedAuthority("ROLE_Funcionario"));
+            return List.of(new SimpleGrantedAuthority("ROLE_Gestor"), new SimpleGrantedAuthority("ROLE_Funcionario"), new SimpleGrantedAuthority("ROLE_Supervisor"));
+        }
+        if(this.permissoes == Permissoes.Supervisor){
+            return List.of(new SimpleGrantedAuthority("ROLE_Supervisor"), new SimpleGrantedAuthority("ROLE_Funcionario"));
         }
         return List.of(new SimpleGrantedAuthority("ROLE_Funcionario"));
     }
