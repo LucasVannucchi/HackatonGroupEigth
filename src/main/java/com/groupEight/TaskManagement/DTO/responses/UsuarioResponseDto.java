@@ -1,6 +1,6 @@
 package com.groupEight.TaskManagement.DTO.responses;
 
-import com.groupEight.TaskManagement.enuns.UsuarioStatus;
+import com.groupEight.TaskManagement.enums.UsuarioStatus;
 
 import java.util.UUID;
 

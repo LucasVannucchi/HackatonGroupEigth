@@ -1,6 +1,6 @@
 package com.groupEight.TaskManagement.DTO.requests;
 
-import com.groupEight.TaskManagement.enuns.Setor;
+import com.groupEight.TaskManagement.enums.Setor;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

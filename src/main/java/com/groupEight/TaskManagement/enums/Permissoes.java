@@ -1,4 +1,4 @@
-package com.groupEight.TaskManagement.enuns;
+package com.groupEight.TaskManagement.enums;
 
 public enum Permissoes {
     Funcionario,

@@ -1,8 +1,8 @@
 package com.groupEight.TaskManagement.models;
 
 
-import com.groupEight.TaskManagement.enuns.Permissoes;
-import com.groupEight.TaskManagement.enuns.UsuarioStatus;
+import com.groupEight.TaskManagement.enums.Permissoes;
+import com.groupEight.TaskManagement.enums.UsuarioStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
