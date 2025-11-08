@@ -26,6 +26,12 @@ public class EquipeController {
     }
 
     @GetMapping
+    public ResponseEntity<List<EquipeResponseDTO>> getAll() {
+        List<EquipeResponseDTO> equipes = equipeService.getAll();
+        return ResponseEntity.ok(equipes);
+    }
+
+    @GetMapping("/equipesAtivas")
     public ResponseEntity<List<EquipeResponseDTO>> getAllOpenedEquipes() {
         List<EquipeResponseDTO> equipes = equipeService.getAllOpenedEquipes();
         return ResponseEntity.ok(equipes);
