@@ -15,6 +15,7 @@ import com.groupEight.TaskManagement.models.Tarefa;
 import com.groupEight.TaskManagement.models.UsuarioModel;
 import com.groupEight.TaskManagement.repository.TarefaRepository;
 import com.groupEight.TaskManagement.repository.UsuarioRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,6 +35,8 @@ public class UsuarioService {
 
     @Autowired
     private TarefaRepository tarefaRepository;
+
+
 
 
     //metodo que vai ser usado no controller, pelo gestor, onde pega o id e confere se é um gestor ou surpervisor
@@ -74,6 +77,7 @@ public class UsuarioService {
         throw new AccessDeniedException("Apenas gestores podem atualizar informações de outros usuários.");
     }
 
+    @Transactional
     public UsuarioResponseDto colocarDeFerias(UsuarioRequestFerias requestFerias, UserDetails userDetails){
         UsuarioModel usuario = getUsuarioModel(userDetails);
 
@@ -148,8 +152,6 @@ public class UsuarioService {
         }
         throw new UnauthorizedException("Apenas Gestores podem realizar o desligamento de um funcionario");
     }
-
-
 
 
 
