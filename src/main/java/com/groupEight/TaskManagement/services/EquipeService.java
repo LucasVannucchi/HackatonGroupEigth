@@ -1,7 +1,7 @@
 package com.groupEight.TaskManagement.services;
 
 import com.groupEight.TaskManagement.DTO.requests.EquipeRequestDTO;
-import com.groupEight.TaskManagement.DTO.requests.UsuarioEmTimeDTO;
+import com.groupEight.TaskManagement.DTO.requests.UsuarioETimeDTO;
 import com.groupEight.TaskManagement.DTO.responses.EquipeResponseDTO;
 import com.groupEight.TaskManagement.enuns.StatusEquipe;
 import com.groupEight.TaskManagement.exception.EquipeNotFoundException;
@@ -13,6 +13,7 @@ import com.groupEight.TaskManagement.repository.EquipeRepository;
 import com.groupEight.TaskManagement.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,12 +23,16 @@ import java.util.List;
 @NoArgsConstructor
 public class EquipeService {
 
+    @Autowired
     EquipeRepository equipeRepository;
+    @Autowired
     EquipeMapper equipeMapper;
+    @Autowired
     UsuarioRepository usuarioRepository;
 
-    public List<EquipeResponseDTO> getAll(){
-        List<EquipeResponseDTO> equipes = equipeRepository.findAll().stream()
+    public List<EquipeResponseDTO> getAllOpenedEquipes(){
+        List<EquipeResponseDTO> equipes = equipeRepository.findAll().stream().filter(e -> e.getStatusEquipe() != null)
+                .filter(e -> e.getStatusEquipe().equals(StatusEquipe.OPERANTE))
                 .map(equipe -> equipeMapper.toResponseDTO(equipe))
                 .toList();
         return equipes;
@@ -35,7 +40,9 @@ public class EquipeService {
 
     public EquipeResponseDTO createEquipe(EquipeRequestDTO dto){
         Equipe equipe = equipeMapper.toEntity(dto);
-        equipeRepository.save(equipe);
+        equipe.setStatusEquipe(StatusEquipe.OPERANTE);
+        equipeRepository.save(equipe).setUsuarios(List.of()); {
+        }
 
         return equipeMapper.toResponseDTO(equipe);
     }
@@ -51,10 +58,11 @@ public class EquipeService {
         }
         equipe.setSetor(dto.setor());
         equipe.setNome(dto.nome());
+        equipeRepository.save(equipe);
         return  equipeMapper.toResponseDTO(equipe);
     }
 
-    public EquipeResponseDTO getById(long id){
+    public EquipeResponseDTO getById(Long id){
         Equipe equipe = equipeRepository.findById(id).orElseThrow(() -> new EquipeNotFoundException("Equipe não encontrada"));
         return equipeMapper.toResponseDTO(equipe);
     }
@@ -64,14 +72,14 @@ public class EquipeService {
         Equipe saved = equipeRepository.save(equipe);
         return equipeMapper.toResponseDTO(saved);
     }
-    public void adicionarUsuario(UsuarioEmTimeDTO usuarioEmTimeDTO){
-        Equipe equipe = equipeRepository.findById(usuarioEmTimeDTO.idEquipe()).orElseThrow(() -> new EquipeNotFoundException("Equipe não encontrada"));
-        UsuarioModel usuario = usuarioRepository.findById(usuarioEmTimeDTO.idUsuario()).orElseThrow(() -> new IllegalArgumentException("Usuario não encontrado"));
+    public void adicionarUsuario(UsuarioETimeDTO usuarioETimeDTO){
+        Equipe equipe = equipeRepository.findById(usuarioETimeDTO.idEquipe()).orElseThrow(() -> new EquipeNotFoundException("Equipe não encontrada"));
+        UsuarioModel usuario = usuarioRepository.findById(usuarioETimeDTO.idUsuario()).orElseThrow(() -> new IllegalArgumentException("Usuario não encontrado"));
         equipe.adicionarUsuario(usuario);
     }
-    public void removerUsuario(UsuarioEmTimeDTO usuarioEmTimeDTO){
-        Equipe equipe = equipeRepository.findById(usuarioEmTimeDTO.idEquipe()).orElseThrow(() -> new EquipeNotFoundException("Equipe não encontrada"));
-        UsuarioModel usuario = usuarioRepository.findById(usuarioEmTimeDTO.idUsuario()).orElseThrow(() -> new IllegalArgumentException("Usuario não encontrado"));
+    public void removerUsuario(UsuarioETimeDTO usuarioETimeDTO){
+        Equipe equipe = equipeRepository.findById(usuarioETimeDTO.idEquipe()).orElseThrow(() -> new EquipeNotFoundException("Equipe não encontrada"));
+        UsuarioModel usuario = usuarioRepository.findById(usuarioETimeDTO.idUsuario()).orElseThrow(() -> new IllegalArgumentException("Usuario não encontrado"));
         equipe.removerUsuario(usuario);
     }
 
