@@ -44,7 +44,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/usuario/gestor/ferias").hasRole("Gestor")
                         .requestMatchers("/usuario/ferias").hasRole("Supervisor")
                         .requestMatchers("/usuario/atualizar").hasRole("Supervisor")
-                        .requestMatchers("/usuario/verTodos").hasRole("Master")
+                        .requestMatchers("/usuario/verTodos").hasRole("Gestor")
                         .requestMatchers(HttpMethod.GET,"/equipes").hasRole("Supervisor")
                         .requestMatchers(HttpMethod.POST, "/tarefas").hasRole("Supervisor")
                         .requestMatchers("/tarefas/reabrir/**").hasRole("Supervisor")
