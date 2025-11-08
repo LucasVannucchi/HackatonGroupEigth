@@ -1,13 +1,18 @@
 package com.groupEight.TaskManagement.exception;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import jakarta.servlet.http.HttpServlet;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -105,7 +110,6 @@ public class GlobalExceptionHandler {
     );
   }
 
-  // --- Método utilitário para construir respostas padronizadas ---
   private ResponseEntity<ErrorResponse> buildErrorResponse(
           HttpStatus status, String error, String message, String path) {
 
@@ -119,4 +123,43 @@ public class GlobalExceptionHandler {
 
     return ResponseEntity.status(status).body(response);
   }
+  @ExceptionHandler(EquipeNotFoundException.class)
+  public ResponseEntity<ErrorResponse> handleEquipeNotFoundException(EquipeNotFoundException ex, HttpServletRequest request) {
+      ErrorResponse dto = new ErrorResponse(LocalDateTime.now(),
+              HttpStatus.NOT_FOUND.value(),
+              "Entidade não encontrada",
+              ex.getMessage(),request.getRequestURI());
+
+    return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
+  }
+  @ExceptionHandler(UserTeamException.class)
+  public ResponseEntity<ErrorResponse> userTeamHandler(UserTeamException ex, HttpServletRequest request) {
+    ErrorResponse dto = new ErrorResponse(LocalDateTime.now(),
+            HttpStatus.CONFLICT.value(),
+            "Problemas ao editar equipe",
+            ex.getMessage(),request.getRequestURI());
+
+    return new ResponseEntity<>(dto, HttpStatus.CONFLICT);
+  }
+  @ExceptionHandler(InvalidFormatException.class)
+  public ResponseEntity<Object> handleInvalidFormat(InvalidFormatException ex) {
+    Map<String, Object> body = new HashMap<>();
+    body.put("timestamp", LocalDateTime.now());
+    body.put("status", HttpStatus.BAD_REQUEST.value());
+    body.put("error", "Valor inválido");
+    body.put("message", "Um dos campos possui um valor inválido. Verifique se o valor do enum está correto.");
+
+    return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+  }
+  @ExceptionHandler(HttpMessageNotReadableException.class)
+  public ResponseEntity<Object> handleInvalidFormat(HttpMessageNotReadableException ex) {
+    Map<String, Object> body = new HashMap<>();
+    body.put("timestamp", LocalDateTime.now());
+    body.put("status", HttpStatus.BAD_REQUEST.value());
+    body.put("error", "Valor inválido");
+    body.put("message", "Um dos campos possui um valor inválido. Verifique se o valor do enum está correto.");
+
+    return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+  }
+
 }
