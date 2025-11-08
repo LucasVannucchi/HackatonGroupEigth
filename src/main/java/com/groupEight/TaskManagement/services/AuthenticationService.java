@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,9 @@ public class AuthenticationService {
     }
 
     public void cadastrarFuncionario(UsuarioRequestDto request){
+        if(verificarSeContemEmail(request.email()) != null){
+            throw new RuntimeException("Email já cadastrado");
+        }
         UsuarioModel usuario = UsuarioModel.builder()
                 .nome(request.nome())
                 .email(request.email())
@@ -59,6 +63,9 @@ public class AuthenticationService {
         usuarioRepository.save(usuario);
     }
     public void cadastrarGestor(UsuarioRequestDto request){
+        if(verificarSeContemEmail(request.email()) != null){
+            throw new RuntimeException("Email já cadastrado");
+        }
         UsuarioModel usuario = UsuarioModel.builder()
                 .nome(request.nome())
                 .email(request.email())
@@ -70,6 +77,9 @@ public class AuthenticationService {
         usuarioRepository.save(usuario);
     }
     public void cadastrarMaster(UsuarioRequestDto request){
+        if(verificarSeContemEmail(request.email()) != null){
+            throw new RuntimeException("Email já cadastrado");
+        }
         UsuarioModel usuario = UsuarioModel.builder()
                 .nome(request.nome())
                 .email(request.email())
@@ -79,6 +89,10 @@ public class AuthenticationService {
                 .status(UsuarioStatus.Ativo)
                 .build();
         usuarioRepository.save(usuario);
+    }
+
+    private UserDetails verificarSeContemEmail(String email){
+        return usuarioRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("Email não cadastrado"));
     }
 
 
