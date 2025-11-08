@@ -8,6 +8,8 @@ import java.util.UUID;
 public record UsuarioResponseDto(
         UUID id,
         String nome,
+        String email,
+        String senha,
         String cargo,
         UsuarioStatus status,
         Permissoes permissoes
