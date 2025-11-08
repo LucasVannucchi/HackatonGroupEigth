@@ -14,6 +14,5 @@ public record TarefaRequestDTO(
         TipoPrioridade prioridade,
         TipoStatus status,
         LocalDateTime dataInicio,
-        LocalDateTime dataPrevista,
-        LocalDateTime dataFim
+        LocalDateTime dataPrevista
 ) {}

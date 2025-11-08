@@ -2,8 +2,10 @@ package com.groupEight.TaskManagement.controller;
 
 import com.groupEight.TaskManagement.DTO.requests.usuario.*;
 import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseDto;
+import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseGestorFeriasDto;
 import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseGetAllDto;
 import com.groupEight.TaskManagement.services.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -25,22 +27,31 @@ public class UsuarioController {
     }
 
     @PutMapping("/atualizar")
-    public ResponseEntity<UsuarioResponseDto> atualizarUsuario(@RequestBody UpdateUsuarioRequestDto requestDto, @AuthenticationPrincipal UserDetails userDetails){
+    public ResponseEntity<UsuarioResponseDto> atualizarUsuario(@RequestBody @Valid UpdateUsuarioRequestDto requestDto, @AuthenticationPrincipal UserDetails userDetails){
         return ResponseEntity.ok(usuarioService.updateUser(requestDto,userDetails));
     }
 
     @PutMapping("/ferias")
     public ResponseEntity<UsuarioResponseDto> colocarDeFerias(
-            @RequestBody UsuarioRequestFerias requestFerias,
+            @RequestBody @Valid UsuarioRequestFerias requestFerias,
             @AuthenticationPrincipal UserDetails userDetails
     ) {
         UsuarioResponseDto response = usuarioService.colocarDeFerias(requestFerias, userDetails);
         return ResponseEntity.ok(response);
     }
 
+    @PutMapping("/gestor/ferias")
+    public ResponseEntity<UsuarioResponseGestorFeriasDto> colocarGestorDeFerias(
+            @RequestBody @Valid UsuarioRequestSupervisorFerias requestFerias,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        UsuarioResponseGestorFeriasDto response = usuarioService.colocarGestorDeFerias(requestFerias, userDetails);
+        return ResponseEntity.ok(response);
+    }
+
     @PutMapping("/desligar")
     public ResponseEntity<UsuarioResponseDto> desligarUsuario(
-            @RequestBody UsuarioRequestDesligamento requestDesligamento,
+            @RequestBody @Valid UsuarioRequestDesligamento requestDesligamento,
             @AuthenticationPrincipal UserDetails userDetails
     ) {
         UsuarioResponseDto response = usuarioService.desligarUsuario(requestDesligamento, userDetails);

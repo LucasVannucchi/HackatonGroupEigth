@@ -1,5 +1,6 @@
 package com.groupEight.TaskManagement.DTO.responses;
 
+import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseDto;
 import com.groupEight.TaskManagement.enuns.TipoPrioridade;
 import com.groupEight.TaskManagement.enuns.TipoStatus;
 import com.groupEight.TaskManagement.models.UsuarioModel;
@@ -12,9 +13,10 @@ public record TarefaResponseDTO(
         Long id,
         String titulo,
         String descricao,
-        UsuarioModel usuario,
+        UsuarioResponseDto responsavel,
         TipoPrioridade prioridade,
         TipoStatus status,
+        LocalDateTime dataCriacao,
         LocalDateTime dataInicio,
         LocalDateTime dataPrevista,
         LocalDateTime dataFim

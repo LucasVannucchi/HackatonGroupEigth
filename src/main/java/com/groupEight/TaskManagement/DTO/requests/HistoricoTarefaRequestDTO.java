@@ -8,8 +8,6 @@ import java.util.List;
 
 @Builder
 public record HistoricoTarefaRequestDTO(
-        String comentario,
-        Acoes acao,
         List<TarefaRequestDTO> tarefas,
         LocalDateTime dataAtualizacao
 ) {
