@@ -38,9 +38,11 @@ public class UsuarioModel implements UserDetails {
     @JoinColumn(name = "equipe_id")
     private Equipe equipe;
 
+    @Builder.Default
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tarefa> tarefa = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HistoricoTarefa> historicoTarefa = new ArrayList<>();
 

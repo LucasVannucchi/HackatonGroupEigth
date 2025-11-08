@@ -10,9 +10,8 @@ import java.time.LocalDateTime;
 @Component
 public class HistoricoMapper {
 
-    public HistoricoTarefa toHistorico(Tarefa tarefa, UsuarioModel usuarioAlteracao, String comentario) {
+    public static HistoricoTarefa toHistorico(Tarefa tarefa, UsuarioModel usuarioAlteracao, String comentario) {
         HistoricoTarefa historico = new HistoricoTarefa();
-        historico.setTarefa(tarefa);
         historico.setTitulo(tarefa.getTitulo());
         historico.setDescricao(tarefa.getDescricao());
         historico.setUsuario(tarefa.getUsuario());

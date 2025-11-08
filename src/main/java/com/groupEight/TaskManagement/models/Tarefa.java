@@ -1,5 +1,6 @@
 package com.groupEight.TaskManagement.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.groupEight.TaskManagement.enuns.Acoes;
 import com.groupEight.TaskManagement.enuns.TipoPrioridade;
 import com.groupEight.TaskManagement.enuns.TipoStatus;
@@ -42,9 +43,4 @@ public class Tarefa {
     private LocalDateTime dataInicio;
     private LocalDateTime dataPrevista;
     private LocalDateTime dataFim;
-
-    // Relacionamento com histórico
-    @Builder.Default
-    @OneToMany(mappedBy = "tarefa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<HistoricoTarefa> historicos = new ArrayList<>();
 }

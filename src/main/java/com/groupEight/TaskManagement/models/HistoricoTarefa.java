@@ -1,5 +1,6 @@
 package com.groupEight.TaskManagement.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.groupEight.TaskManagement.enuns.Acoes;
 import com.groupEight.TaskManagement.enuns.TipoPrioridade;
 import com.groupEight.TaskManagement.enuns.TipoStatus;
@@ -46,10 +47,6 @@ public class HistoricoTarefa {
     private UsuarioModel usuarioAlteracao;
 
     private String comentario;
-    private LocalDateTime dataAtualizacao;
 
-    // Relacionamento com a tarefa
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tarefa_id")
-    private Tarefa tarefa;
+    private LocalDateTime dataAtualizacao;
 }

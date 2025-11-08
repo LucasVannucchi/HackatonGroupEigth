@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +30,11 @@ public class TarefaController {
     @PostMapping
     @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Cria uma nova tarefa")
-    public ResponseEntity<BaseResponse> createTarefa(@RequestBody TarefaRequestDTO tarefaRequestDTO) {
+    public ResponseEntity<BaseResponse> createTarefa(@RequestBody TarefaRequestDTO tarefaRequestDTO, @AuthenticationPrincipal UserDetails userDetails) {
         return ResponseEntity.ok(BaseResponse.builder()
                 .message("Tarefa criada com sucesso")
                 .status(HttpStatus.OK)
-                .data(tarefaService.criarTarefa(tarefaRequestDTO))
+                .data(tarefaService.criarTarefa(tarefaRequestDTO, userDetails))
                 .build());
     }
 }

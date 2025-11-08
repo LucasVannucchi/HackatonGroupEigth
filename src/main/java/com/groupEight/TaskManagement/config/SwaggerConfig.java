@@ -5,6 +5,7 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.Components;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,14 +24,15 @@ public class SwaggerConfig {
                         .contact(new Contact()
                                 .name("Equipe Grupo 10")
                                 .email("contato@grupo10.com")))
-                // Define o esquema de segurança (JWT Bearer)
-                .schemaRequirement(securitySchemeName,
-                        new SecurityScheme()
-                                .name(securitySchemeName)
-                                .type(SecurityScheme.Type.HTTP)
-                                .scheme("bearer")
-                                .bearerFormat("JWT"))
-                // Aplica a segurança globalmente
+                // adiciona corretamente o esquema de segurança
+                .components(new Components()
+                        .addSecuritySchemes(securitySchemeName,
+                                new SecurityScheme()
+                                        .name(securitySchemeName)
+                                        .type(SecurityScheme.Type.HTTP)
+                                        .scheme("bearer")
+                                        .bearerFormat("JWT")))
+                // adiciona o requisito de segurança global
                 .addSecurityItem(new SecurityRequirement().addList(securitySchemeName));
     }
 }
