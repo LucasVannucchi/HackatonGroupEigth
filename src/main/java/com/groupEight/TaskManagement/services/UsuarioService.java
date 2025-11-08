@@ -41,7 +41,7 @@ public class UsuarioService {
 
         UsuarioModel usuario = getUsuarioModel(userDetails);
 
-        if(usuario.getPermissoes()==Permissoes.Gestor){
+        if(usuario.getPermissoes()!=Permissoes.Funcionario){
             return usuarioRepository.findAll().stream()
                     .map(UsuarioMapper::convertToUsuarioResponseGetAllDto)
                     .toList();
