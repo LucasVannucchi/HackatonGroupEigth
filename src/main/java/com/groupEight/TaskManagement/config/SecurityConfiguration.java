@@ -37,7 +37,7 @@ public class SecurityConfiguration {
                         //.requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/auth/login").permitAll()
                         // Endpoints privados
-                        .requestMatchers("/auth/cadastrar/master").permitAll()
+                        .requestMatchers("/auth/cadastrar/master").hasRole("Master")
                         .requestMatchers("/auth/cadastrar/gestor").hasRole("Master")
                         .requestMatchers("/auth/cadastrar/supervisor").hasRole("Gestor")
                         .requestMatchers("/auth/cadastrar/funcionario").hasRole("Supervisor")
@@ -64,6 +64,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/historico/**").hasRole("Supervisor")
                         .requestMatchers(HttpMethod.POST, "/equipes").hasRole("Supervisor")
                         .requestMatchers(HttpMethod.PUT, "/equipes/{id}").hasRole("Supervisor")
+                        .requestMatchers(HttpMethod.GET, "/equipes/{id}").hasRole("Supervisor")
                         .requestMatchers(HttpMethod.POST, "/equipes/adicionar-usuario").hasRole("Supervisor")
                         .requestMatchers(HttpMethod.PATCH, "/equipes/{id}/encerrar").hasRole("Supervisor")
                         .requestMatchers(HttpMethod.GET, "/equipes/equipesAtivas").hasRole("Supervisor")
