@@ -9,7 +9,6 @@ public record UsuarioResponseGetAllDto(
         UUID id,
         String nome,
         String email,
-        String senha,
         String cargo,
         UsuarioStatus status,
         Permissoes permissoes,

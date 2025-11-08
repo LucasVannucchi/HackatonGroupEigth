@@ -49,7 +49,6 @@ public class UsuarioMapper {
                 model.getId(),
                 model.getNome(),
                 model.getEmail(),
-                new BCryptPasswordEncoder().encode(model.getSenha()),
                 model.getCargo(),
                 model.getStatus(),
                 model.getPermissoes(),
