@@ -66,14 +66,14 @@ public class UsuarioService {
         throw new AccessDeniedException("Apenas gestores podem atualizar informações de outros usuários.");
     }
 
-    public UsuarioResponseDto colocarDeFerias(UsuarioRequestFerias requestFerias, UserDetails userDetails){
-        UsuarioModel usuario = getUsuarioModel(userDetails);
-
-        if(usuario.getPermissoes()==Permissoes.Gestor){
-            List<Tarefa> lista = usuario.getTarefa();
-
-        }
-    }
+//    public UsuarioResponseDto colocarDeFerias(UsuarioRequestFerias requestFerias, UserDetails userDetails){
+//        UsuarioModel usuario = getUsuarioModel(userDetails);
+//
+//        if(usuario.getPermissoes()==Permissoes.Gestor){
+//            List<Tarefa> lista = usuario.getTarefa();
+//
+//        }
+//    }
 
 
 

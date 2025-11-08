@@ -4,6 +4,7 @@ import com.groupEight.TaskManagement.DTO.requests.EquipeRequestDTO;
 import com.groupEight.TaskManagement.DTO.requests.UsuarioETimeDTO;
 import com.groupEight.TaskManagement.DTO.responses.EquipeResponseDTO;
 import com.groupEight.TaskManagement.enuns.StatusEquipe;
+import com.groupEight.TaskManagement.exception.EntityNotFoundException;
 import com.groupEight.TaskManagement.exception.EquipeNotFoundException;
 import com.groupEight.TaskManagement.exception.UnableToUpdateEquipeException;
 import com.groupEight.TaskManagement.mappers.EquipeMapper;
@@ -74,13 +75,18 @@ public class EquipeService {
     }
     public void adicionarUsuario(UsuarioETimeDTO usuarioETimeDTO){
         Equipe equipe = equipeRepository.findById(usuarioETimeDTO.idEquipe()).orElseThrow(() -> new EquipeNotFoundException("Equipe não encontrada"));
-        UsuarioModel usuario = usuarioRepository.findById(usuarioETimeDTO.idUsuario()).orElseThrow(() -> new IllegalArgumentException("Usuario não encontrado"));
-        equipe.adicionarUsuario(usuario);
+        UsuarioModel usuario = (UsuarioModel) usuarioRepository.findByEmail(usuarioETimeDTO.email()).orElseThrow(() -> new EntityNotFoundException("Usuario não encontrado"));
+        usuario.setEquipe(equipe);
+        equipeRepository.save(equipe);
+        usuarioRepository.save(usuario);
     }
     public void removerUsuario(UsuarioETimeDTO usuarioETimeDTO){
         Equipe equipe = equipeRepository.findById(usuarioETimeDTO.idEquipe()).orElseThrow(() -> new EquipeNotFoundException("Equipe não encontrada"));
-        UsuarioModel usuario = usuarioRepository.findById(usuarioETimeDTO.idUsuario()).orElseThrow(() -> new IllegalArgumentException("Usuario não encontrado"));
+        UsuarioModel usuario = (UsuarioModel) usuarioRepository.findByEmail(usuarioETimeDTO.email()).orElseThrow(() -> new IllegalArgumentException("Usuario não encontrado"));
         equipe.removerUsuario(usuario);
+        usuario.setEquipe(null);
+        equipeRepository.save(equipe);
+        usuarioRepository.save(usuario);
     }
 
 
