@@ -3,7 +3,7 @@ package com.groupEight.TaskManagement.controller;
 import com.groupEight.TaskManagement.DTO.requests.EquipeRequestDTO;
 import com.groupEight.TaskManagement.DTO.requests.UsuarioEmTimeDTO;
 import com.groupEight.TaskManagement.DTO.responses.EquipeResponseDTO;
-import com.groupEight.TaskManagement.service.EquipeService;
+import com.groupEight.TaskManagement.services.EquipeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
