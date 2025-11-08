@@ -7,16 +7,14 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-@NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Builder
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "tb_tarefas")
-public class Tarefa {
+@Table(name = "tb_tarefas_historico")
+public class HistoricoTarefa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,8 +41,15 @@ public class Tarefa {
     private LocalDateTime dataPrevista;
     private LocalDateTime dataFim;
 
-    // Relacionamento com histórico
-    @Builder.Default
-    @OneToMany(mappedBy = "tarefa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<HistoricoTarefa> historicos = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_alteracao")
+    private UsuarioModel usuarioAlteracao;
+
+    private String comentario;
+    private LocalDateTime dataAtualizacao;
+
+    // Relacionamento com a tarefa
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tarefa_id")
+    private Tarefa tarefa;
 }
