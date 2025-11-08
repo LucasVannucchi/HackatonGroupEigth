@@ -2,7 +2,7 @@ package com.groupEight.TaskManagement.controller;
 
 
 import com.groupEight.TaskManagement.DTO.requests.UsuarioLoginRequestDTO;
-import com.groupEight.TaskManagement.DTO.requests.UsuarioRequest;
+import com.groupEight.TaskManagement.DTO.requests.usuario.UsuarioRequestDto;
 import com.groupEight.TaskManagement.services.AuthenticationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/cadastrar")
-    public ResponseEntity cadastrar(@RequestBody UsuarioRequest request){
+    public ResponseEntity cadastrar(@RequestBody UsuarioRequestDto request){
         log.info("Senha: " + request.senha());
         authenticationService.cadastrar(request);
         URI uri = UriComponentsBuilder.fromPath("/auth/cadastrar").buildAndExpand().toUri();

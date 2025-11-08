@@ -2,7 +2,8 @@ package com.groupEight.TaskManagement.services;
 
 import com.groupEight.TaskManagement.DTO.requests.UsuarioLoginRequestDTO;
 
-import com.groupEight.TaskManagement.DTO.requests.UsuarioRequest;
+import com.groupEight.TaskManagement.DTO.requests.usuario.UsuarioRequestDto;
+import com.groupEight.TaskManagement.enuns.UsuarioStatus;
 import com.groupEight.TaskManagement.models.UsuarioModel;
 import com.groupEight.TaskManagement.repository.UsuarioRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -34,15 +35,14 @@ public class AuthenticationService {
         return token;
     }
 
-    public void cadastrar(UsuarioRequest request){
-        log.info("Senha recebida do DTO: "+ request.senha());
+    public void cadastrar(UsuarioRequestDto request){
         UsuarioModel usuario = UsuarioModel.builder()
                 .nome(request.nome())
                 .email(request.email())
                 .senha(new BCryptPasswordEncoder().encode(request.senha()))
                 .permissoes(request.permissoes())
                 .cargo(request.cargo())
-                .status(request.status())
+                .status(UsuarioStatus.Ativo)
                 .build();
         usuarioRepository.save(usuario);
     }
