@@ -2,8 +2,6 @@ package com.groupEight.TaskManagement.controller;
 
 import com.groupEight.TaskManagement.DTO.requests.TarefaRequestDTO;
 import com.groupEight.TaskManagement.DTO.responses.BaseResponse;
-import com.groupEight.TaskManagement.mappers.TarefaMapper;
-import com.groupEight.TaskManagement.repository.TarefasRepository;
 import com.groupEight.TaskManagement.services.TarefaService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;

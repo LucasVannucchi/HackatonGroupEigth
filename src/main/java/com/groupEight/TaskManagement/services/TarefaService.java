@@ -2,11 +2,7 @@ package com.groupEight.TaskManagement.services;
 
 import com.groupEight.TaskManagement.DTO.requests.TarefaRequestDTO;
 import com.groupEight.TaskManagement.DTO.responses.TarefaResponseDTO;
-<<<<<<< HEAD
 import com.groupEight.TaskManagement.mappers.HistoricoMapper;
-=======
-import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseDto;
->>>>>>> 1f0bcd7ca65f85080436dc5d3ba7deeaca218d3f
 import com.groupEight.TaskManagement.mappers.TarefaMapper;
 import com.groupEight.TaskManagement.models.HistoricoTarefa;
 import com.groupEight.TaskManagement.models.Tarefa;
@@ -25,13 +21,8 @@ public class TarefaService {
     private HistoricoRepository historicoRepository;
     private UsuarioRepository usuarioRepository;
 
-<<<<<<< HEAD
-    public TarefaService(TarefasRepository tarefasRepository, HistoricoRepository historicoRepository, UsuarioRepository usuarioRepository){
-        this.tarefasRepository = tarefasRepository;
-=======
-    public TarefaService(TarefaRepository TarefaRepository, HistoricoRepository historicoRepository){
-        this.tarefaRepository = TarefaRepository;
->>>>>>> 1f0bcd7ca65f85080436dc5d3ba7deeaca218d3f
+    public TarefaService(TarefaRepository tarefaRepository, HistoricoRepository historicoRepository, UsuarioRepository usuarioRepository){
+        this.tarefaRepository = tarefaRepository;
         this.historicoRepository = historicoRepository;
         this.usuarioRepository = usuarioRepository;
     }
@@ -51,17 +42,11 @@ public class TarefaService {
 
         Tarefa tarefa = TarefaMapper.toTarefa(tarefaRequestDTO);
 
-<<<<<<< HEAD
         HistoricoTarefa historicoTarefa = HistoricoMapper.toHistorico(tarefa, usuario, "Tarefa criada");
 
-        Tarefa salvarTarefa = tarefasRepository.save(tarefa);
-        historicoRepository.save(historicoTarefa);
-=======
         Tarefa salvarTarefa = tarefaRepository.save(tarefa);
->>>>>>> 1f0bcd7ca65f85080436dc5d3ba7deeaca218d3f
+        historicoRepository.save(historicoTarefa);
         return TarefaMapper.toTarefaResponseDTO(salvarTarefa);
-
-
 
     }
 }
