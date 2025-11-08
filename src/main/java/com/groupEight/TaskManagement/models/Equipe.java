@@ -33,5 +33,4 @@ public class Equipe {
 
     //Ajustar relação posteriormente
     private List<UsuarioModel> usuarios;
-
 }
