@@ -2,6 +2,7 @@ package com.groupEight.TaskManagement.services;
 
 import com.groupEight.TaskManagement.DTO.requests.usuario.*;
 import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseDto;
+import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseGetAllDto;
 import com.groupEight.TaskManagement.enuns.Acoes;
 import com.groupEight.TaskManagement.enuns.Permissoes;
 import com.groupEight.TaskManagement.enuns.TipoStatus;

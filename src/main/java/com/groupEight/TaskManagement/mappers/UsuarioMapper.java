@@ -1,7 +1,7 @@
 package com.groupEight.TaskManagement.mappers;
 
 import com.groupEight.TaskManagement.DTO.requests.usuario.UpdateUsuarioRequestDto;
-import com.groupEight.TaskManagement.DTO.requests.usuario.UsuarioResponseGetAllDto;
+import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseGetAllDto;
 import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseDto;
 import com.groupEight.TaskManagement.models.UsuarioModel;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

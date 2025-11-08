@@ -1,4 +1,4 @@
-package com.groupEight.TaskManagement.DTO.requests.usuario;
+package com.groupEight.TaskManagement.DTO.responses.usuario;
 
 import com.groupEight.TaskManagement.enuns.Permissoes;
 import com.groupEight.TaskManagement.enuns.UsuarioStatus;

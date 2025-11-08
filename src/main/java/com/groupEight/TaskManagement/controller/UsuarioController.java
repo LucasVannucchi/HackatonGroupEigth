@@ -2,9 +2,8 @@ package com.groupEight.TaskManagement.controller;
 
 import com.groupEight.TaskManagement.DTO.requests.usuario.*;
 import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseDto;
-import com.groupEight.TaskManagement.models.UsuarioModel;
+import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseGetAllDto;
 import com.groupEight.TaskManagement.services.UsuarioService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/usuario")
