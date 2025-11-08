@@ -4,18 +4,18 @@
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## ⚙️ Tecnologias Utilizadas
 
-![Java](https://img.shields.io/badge/Java-21-orange?logo=java&style=for-the-badge)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?logo=springboot&style=for-the-badge)
-![Spring Security](https://img.shields.io/badge/Spring%20Security-JWT-success?logo=springsecurity&style=for-the-badge)
-![Gradle](https://img.shields.io/badge/Gradle-Build%20Tool-02303A?logo=gradle&style=for-the-badge)
-![MySQL](https://img.shields.io/badge/MySQL-Database-blue?logo=mysql&style=for-the-badge)
-![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-green?logo=swagger&style=for-the-badge)
-![Postman](https://img.shields.io/badge/Postman-API%20Testing-orange?logo=postman&style=for-the-badge)
-![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ%20IDEA-IDE-black?logo=intellijidea&style=for-the-badge)
-![DBeaver](https://img.shields.io/badge/DBeaver-DB%20Manager-lightgrey?logo=dbeaver&style=for-the-badge)
-
+![Java](https://img.shields.io/badge/Java-21-orange?logo=java&logoColor=white&style=for-the-badge)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3-brightgreen?logo=springboot&logoColor=white&style=for-the-badge)
+![Spring Security](https://img.shields.io/badge/Spring%20Security-JWT-blue?logo=springsecurity&logoColor=white&style=for-the-badge)
+![Spring Data JPA](https://img.shields.io/badge/Spring%20Data%20JPA-Hibernate-6DB33F?logo=hibernate&logoColor=white&style=for-the-badge)
+![Lombok](https://img.shields.io/badge/Lombok-Red?logo=lombok&logoColor=white&style=for-the-badge)
+![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-orange?logo=swagger&logoColor=white&style=for-the-badge)
+![Gradle](https://img.shields.io/badge/Gradle-7.6-blue?logo=gradle&logoColor=white&style=for-the-badge)
+![Aiven](https://img.shields.io/badge/Aiven-Cloud-lightgrey?logo=aiven&logoColor=white&style=for-the-badge)
+![H2 Database](https://img.shields.io/badge/H2-Database-purple?logo=h2database&logoColor=white&style=for-the-badge)
+![MySQL](https://img.shields.io/badge/MySQL-8-blue?logo=mysql&logoColor=white&style=for-the-badge)
 
 ---
 
@@ -72,6 +72,7 @@ O projeto segue o padrão **Clean Architecture**, garantindo organização, sepa
 - **Lombok**
 - **Swagger (OpenAPI 3)**
 - **Gradle**
+- **Aiven (Banco de Dados na Nuvem)**
 - **H2 / MySQL (dependendo do ambiente)**
 
 ---
