@@ -54,6 +54,7 @@ public class TarefaMapper {
                 .descricao(tarefa.getDescricao())
                 .responsavel(usuarioResponseDto)
                 .status(tarefa.getStatus())
+                .acoes(tarefa.getAcao())
                 .prioridade(tarefa.getPrioridade())
                 .dataCriacao(tarefa.getDataCriacao())
                 .dataInicio(tarefa.getDataInicio())

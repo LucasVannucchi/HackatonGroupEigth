@@ -26,8 +26,8 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.getAllUsers(userDetails));
     }
 
-    @PutMapping("/atualizar")
-    public ResponseEntity<UsuarioResponseDto> atualizarUsuario(@RequestBody @Valid UpdateUsuarioRequestDto requestDto, @AuthenticationPrincipal UserDetails userDetails){
+    @PatchMapping("/atualizar")
+    public ResponseEntity<UsuarioResponseDto> atualizarUsuario(@RequestBody UpdateUsuarioRequestDto requestDto, @AuthenticationPrincipal UserDetails userDetails){
         return ResponseEntity.ok(usuarioService.updateUser(requestDto,userDetails));
     }
 

@@ -65,6 +65,7 @@ public class UsuarioService {
                     .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
 
             UsuarioMapper.updateUsuarioFromDto(requestDto, usuarioModel);
+            usuarioModel.setStatus(requestDto.status());
 
             usuarioRepository.save(usuarioModel);
 
@@ -105,21 +106,22 @@ public class UsuarioService {
         UsuarioModel usuario = getUsuarioModel(userDetails);//gestor que quer ferias
 
         if(usuario.getPermissoes()==Permissoes.Gestor){
-            UsuarioModel usuarioModel = (UsuarioModel) usuarioRepository.findByEmail(requestFerias.emailParaNovoSupervisor()).orElseThrow(()->new EntityNotFoundException("Usuario não encontrado"));
+            UsuarioModel substituto = (UsuarioModel) usuarioRepository.findByEmail(requestFerias.emailSubstituto()).orElseThrow(()->new EntityNotFoundException("Usuario não encontrado"));
 
-            usuarioModel.setPermissoes(Permissoes.Supervisor);
+            substituto.setPermissoes(Permissoes.Supervisor);
+            substituto.setStatus(UsuarioStatus.Ativo);
             usuario.setStatus(UsuarioStatus.Ferias);
             List<TipoStatus> listaStatus = List.of(TipoStatus.Em_Andamento,TipoStatus.Pendente);
             List<Tarefa> listaTarefas = tarefaRepository.findTarefasByUsuarioAndDataPrevistaBetweenAndStatusIn(usuario.getId(),requestFerias.dataInicio(),requestFerias.dataFinal(),listaStatus);
 
             listaTarefas.forEach(tarefa -> {
                 tarefa.setAcao(Acoes.Realocar);
-                tarefa.setUsuario(usuarioModel);
+                tarefa.setUsuario(substituto);
             });
             tarefaRepository.saveAll(listaTarefas);
 
             usuarioRepository.save(usuario);
-            return UsuarioMapper.convertToGestorFeriasResponseDto(usuario,usuarioModel,requestFerias.dataInicio(),requestFerias.dataFinal());
+            return UsuarioMapper.convertToGestorFeriasResponseDto(usuario,substituto,requestFerias.dataInicio(),requestFerias.dataFinal());
         }
         throw new UnauthorizedException("Apenas Gestores podem designar férias");
     }
