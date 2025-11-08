@@ -12,7 +12,7 @@ public record TarefaResponseDTO(
         Long id,
         String titulo,
         String descricao,
-        UsuarioModel proprietario,
+        UsuarioModel usuario,
         TipoPrioridade prioridade,
         TipoStatus status,
         LocalDateTime dataInicio,

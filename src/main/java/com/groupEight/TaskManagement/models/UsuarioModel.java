@@ -41,7 +41,10 @@ public class UsuarioModel {
     private UsuarioStatus status;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Tarefa> tarefa;
+    private List<Tarefa> tarefa = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HistoricoTarefa> historicoTarefa = new ArrayList<>();
 
     /*@ManyToOne
     @JoinColumn(name = "equipe_id")
