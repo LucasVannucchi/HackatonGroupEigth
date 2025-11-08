@@ -5,6 +5,7 @@ import com.groupEight.TaskManagement.DTO.responses.BaseResponse;
 import com.groupEight.TaskManagement.mappers.TarefaMapper;
 import com.groupEight.TaskManagement.repository.TarefasRepository;
 import com.groupEight.TaskManagement.services.TarefaService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ public class TarefaController {
     private TarefaService tarefaService;
 
     @PostMapping
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Cria uma nova tarefa")
     public ResponseEntity<BaseResponse> createTarefa(@RequestBody TarefaRequestDTO tarefaRequestDTO) {
         return ResponseEntity.ok(BaseResponse.builder()
