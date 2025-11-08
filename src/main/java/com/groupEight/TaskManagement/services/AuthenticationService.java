@@ -38,8 +38,8 @@ public class AuthenticationService {
     }
 
     public void cadastrarFuncionario(UsuarioRequestDto request){
-        if(verificarSeContemEmail(request.email()) != null){
-            throw new RuntimeException("Email já cadastrado");
+        if (verificarSeEmailJaExiste(request.email()) == true){
+            throw new RuntimeException("Usuario já com email cadastrado");
         }
         UsuarioModel usuario = UsuarioModel.builder()
                 .nome(request.nome())
@@ -52,6 +52,9 @@ public class AuthenticationService {
         usuarioRepository.save(usuario);
     }
     public void cadastrarSupervisor(UsuarioRequestDto request){
+        if (verificarSeEmailJaExiste(request.email()) == true){
+            throw new RuntimeException("Usuario já com email cadastrado");
+        }
         UsuarioModel usuario = UsuarioModel.builder()
                 .nome(request.nome())
                 .email(request.email())
@@ -63,8 +66,8 @@ public class AuthenticationService {
         usuarioRepository.save(usuario);
     }
     public void cadastrarGestor(UsuarioRequestDto request){
-        if(verificarSeContemEmail(request.email()) != null){
-            throw new RuntimeException("Email já cadastrado");
+        if (verificarSeEmailJaExiste(request.email()) == true){
+            throw new RuntimeException("Usuario já com email cadastrado");
         }
         UsuarioModel usuario = UsuarioModel.builder()
                 .nome(request.nome())
@@ -77,8 +80,8 @@ public class AuthenticationService {
         usuarioRepository.save(usuario);
     }
     public void cadastrarMaster(UsuarioRequestDto request){
-        if(verificarSeContemEmail(request.email()) != null){
-            throw new RuntimeException("Email já cadastrado");
+        if (verificarSeEmailJaExiste(request.email()) == true){
+            throw new RuntimeException("Usuario já com email cadastrado");
         }
         UsuarioModel usuario = UsuarioModel.builder()
                 .nome(request.nome())
@@ -91,9 +94,11 @@ public class AuthenticationService {
         usuarioRepository.save(usuario);
     }
 
-    private UserDetails verificarSeContemEmail(String email){
-        return usuarioRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("Email não cadastrado"));
+    private boolean verificarSeEmailJaExiste(String email){
+        if (usuarioRepository.existsByEmail(email)){
+            return true;
+        }
+        return false;
     }
-
 
 }

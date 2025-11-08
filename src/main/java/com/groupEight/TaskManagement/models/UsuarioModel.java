@@ -28,10 +28,16 @@ public class UsuarioModel implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String nome;
+
+    @Column(unique = true)
     private String email;
     private String senha;
     private String cargo;
+
+    @Enumerated(EnumType.STRING)
     private Permissoes permissoes;
+
+    @Enumerated(EnumType.STRING)
     private UsuarioStatus status;
 
     @ManyToOne

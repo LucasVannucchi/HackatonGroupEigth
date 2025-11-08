@@ -35,6 +35,7 @@ public class Equipe {
     private Setor setor;
 
     @Column(name = "status_equipe")
+    @Enumerated(EnumType.STRING)
     private StatusEquipe statusEquipe;
 
     @OneToMany(mappedBy = "equipe")

@@ -37,7 +37,7 @@ public class SecurityConfiguration {
                         //.requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/auth/login").permitAll()
                         // Endpoints privados
-                        .requestMatchers("/auth/cadastrar/master").hasRole("Master")
+                        .requestMatchers("/auth/cadastrar/master").permitAll()
                         .requestMatchers("/auth/cadastrar/gestor").hasRole("Master")
                         .requestMatchers("/auth/cadastrar/supervisor").hasRole("Gestor")
                         .requestMatchers("/auth/cadastrar/funcionario").hasRole("Supervisor")
