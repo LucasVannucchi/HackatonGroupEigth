@@ -13,7 +13,6 @@ public class TarefaMapper {
         return Tarefa.builder()
                 .titulo(tarefaRequestDTO.titulo())
                 .descricao(tarefaRequestDTO.descricao())
-                .usuario(tarefaRequestDTO.proprietario())
                 .status(tarefaRequestDTO.status())
                 .prioridade(tarefaRequestDTO.prioridade())
                 .dataInicio(tarefaRequestDTO.dataInicio())
@@ -33,9 +32,10 @@ public class TarefaMapper {
 
     public static TarefaResponseDTO toTarefaResponseDTO(Tarefa tarefa){
         return TarefaResponseDTO.builder()
+                .id(tarefa.getId())
                 .titulo(tarefa.getTitulo())
                 .descricao(tarefa.getDescricao())
-                .proprietario(tarefa.getUsuario())
+                .usuario(tarefa.getUsuario())
                 .status(tarefa.getStatus())
                 .prioridade(tarefa.getPrioridade())
                 .dataInicio(tarefa.getDataInicio())
