@@ -34,12 +34,41 @@ public class SecurityConfiguration {
                 // Configura rotas públicas e privadas
                 .authorizeHttpRequests(authorization -> authorization
                         // Endpoints públicos
-                        .requestMatchers("/h2-console/**").permitAll()
+                        //.requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/auth/login").permitAll()
-                        .requestMatchers("/auth/cadastrar/master").permitAll()
+                        // Endpoints privados
+                        .requestMatchers("/auth/cadastrar/master").hasRole("Master")
                         .requestMatchers("/auth/cadastrar/gestor").hasRole("Master")
                         .requestMatchers("/auth/cadastrar/supervisor").hasRole("Gestor")
                         .requestMatchers("/auth/cadastrar/funcionario").hasRole("Supervisor")
+                        .requestMatchers("/usuario/gestor/ferias").hasRole("Gestor")
+                        .requestMatchers("/usuario/ferias").hasRole("Supervisor")
+                        .requestMatchers("/usuario/atualizar").hasRole("Supervisor")
+                        .requestMatchers("/usuario/verTodos").hasRole("Master")
+                        .requestMatchers("/equipe/**").hasRole("Supervisor")
+                        .requestMatchers(HttpMethod.POST, "/tarefas").hasRole("Supervisor")
+                        .requestMatchers("/tarefas/reabrir/**").hasRole("Supervisor")
+                        .requestMatchers("/tarefas/iniciar/**").hasRole("Funcionario")
+                        .requestMatchers("/tarefas/concluir/**").hasRole("Supervisor")
+                        .requestMatchers("/tarefas/cancelar/**").hasRole("Supervisor")
+                        .requestMatchers("/tarefas/atualizar/**").hasRole("Supervisor")
+                        .requestMatchers("/tarefas/atribuir").hasRole("Supervisor")
+                        .requestMatchers("/tarefas/analisar/**").hasRole("Funcionario")
+                        .requestMatchers(HttpMethod.GET, "/tarefas/{id}").hasRole("Supervisor")
+                        .requestMatchers(HttpMethod.GET, "/tarefas/status/{status}").hasRole("Funcionario")
+                        .requestMatchers(HttpMethod.GET, "/tarefas/status/all/**").hasRole("Supervisor")
+                        .requestMatchers(HttpMethod.GET, "/tarefas/prioridade/{prioridade}").hasRole("Funcionario")
+                        .requestMatchers(HttpMethod.GET, "/tarefas/prioridade/all/{prioridade}").hasRole("Supervisor")
+                        .requestMatchers(HttpMethod.GET, "/tarefas/all").hasRole("Supervisor")
+                        .requestMatchers(HttpMethod.GET, "/tarefas/all/minhasTarefas").hasRole("Funcionario")
+                        .requestMatchers(HttpMethod.GET, "/historico/**").hasRole("Supervisor")
+                        .requestMatchers(HttpMethod.POST, "/equipes").hasRole("Supervisor")
+                        .requestMatchers(HttpMethod.PUT, "/equipes/{id}").hasRole("Supervisor")
+                        .requestMatchers(HttpMethod.POST, "/equipes/adicionar-usuario").hasRole("Supervisor")
+                        .requestMatchers(HttpMethod.PATCH, "/equipes/{id}/encerrar").hasRole("Supervisor")
+                        .requestMatchers(HttpMethod.GET, "/equipes/equipesAtivas").hasRole("Supervisor")
+                        .requestMatchers(HttpMethod.DELETE, "/equipes/remover-usuario").hasRole("Supervisor")
+
                         // Endpoints necessários para o Swagger funcionar
                         .requestMatchers(
                                 "/v3/api-docs/**",
@@ -47,8 +76,6 @@ public class SecurityConfiguration {
                                 "/swagger-ui.html",
                                 "/swagger-resources/**"
                         ).permitAll()
-                        // Exemplo de endpoint restrito
-                        .requestMatchers(HttpMethod.GET, "/teste").hasRole("Gestor")
                         // Todas as outras rotas exigem autenticação
                         .anyRequest().authenticated()
                 )

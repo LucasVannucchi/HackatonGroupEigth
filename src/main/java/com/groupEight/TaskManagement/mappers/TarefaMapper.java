@@ -41,7 +41,6 @@ public class TarefaMapper {
                     tarefa.getUsuario().getId(),
                     tarefa.getUsuario().getNome(),
                     tarefa.getUsuario().getEmail(),
-                    tarefa.getUsuario().getSenha(),
                     tarefa.getUsuario().getCargo(),
                     tarefa.getUsuario().getStatus(),
                     tarefa.getUsuario().getPermissoes()
