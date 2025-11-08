@@ -17,9 +17,9 @@ import java.util.UUID;
 public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
     List<Tarefa> findByUsuario(UsuarioModel usuario);
     List<Tarefa> findByStatus(TipoStatus status);
-    List<Tarefa> findByStatusAndUsuario(UsuarioModel usuario, TipoStatus status);
+    List<Tarefa> findByStatusAndUsuario(TipoStatus status, UsuarioModel usuario);
     List<Tarefa> findByPrioridade(TipoPrioridade prioridade);
-    List<Tarefa> findByPrioridadeAndUsuario(UsuarioModel usuario, TipoPrioridade prioridade);
+    List<Tarefa> findByPrioridadeAndUsuario(TipoPrioridade prioridade, UsuarioModel usuario);
 
     @Query("""
     SELECT t

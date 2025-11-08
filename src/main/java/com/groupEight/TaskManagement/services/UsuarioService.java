@@ -106,29 +106,44 @@ public class UsuarioService {
         throw new UnauthorizedException("Apenas Líderes podem registrar férias");
     }
 
-    public UsuarioResponseGestorFeriasDto colocarGestorDeFerias(UsuarioRequestSupervisorFerias requestFerias, UserDetails userDetails){
-        UsuarioModel usuario = getUsuarioModel(userDetails);//gestor que quer ferias
+    public UsuarioResponseGestorFeriasDto colocarGestorDeFerias(
+            UsuarioRequestSupervisorFerias requestFerias,
+            UserDetails userDetails
+    ) {
+        UsuarioModel usuario = getUsuarioModel(userDetails);
 
-        if(usuario.getPermissoes()==Permissoes.Gestor){
-            UsuarioModel substituto = (UsuarioModel) usuarioRepository.findByEmail(requestFerias.emailSubstituto()).orElseThrow(()->new EntityNotFoundException("Usuario não encontrado"));
+        if (usuario.getPermissoes() == Permissoes.Gestor) {
+
+            UsuarioModel substituto = (UsuarioModel) usuarioRepository.findByEmail(requestFerias.emailSubstituto())
+                    .orElseThrow(() -> new EntityNotFoundException("Usuário substituto não encontrado"));
 
             substituto.setPermissoes(Permissoes.Supervisor);
             substituto.setStatus(UsuarioStatus.Ativo);
             usuario.setStatus(UsuarioStatus.Ferias);
-            List<TipoStatus> listaStatus = List.of(TipoStatus.Em_Andamento,TipoStatus.Pendente);
-            List<Tarefa> listaTarefas = tarefaRepository.findTarefasByUsuarioAndDataPrevistaBetweenAndStatusIn(usuario.getId(),requestFerias.dataInicio(),requestFerias.dataFinal(),listaStatus);
 
-            listaTarefas.forEach(tarefa -> {
-                tarefa.setAcao(Acoes.Realocar);
-                tarefa.setUsuario(substituto);
-            });
+            List<TipoStatus> listaStatus = List.of(TipoStatus.Em_Andamento, TipoStatus.Pendente);
+            List<Tarefa> listaTarefas = tarefaRepository.findTarefasByUsuarioAndDataPrevistaBetweenAndStatusIn(
+                    usuario.getId(),
+                    requestFerias.dataInicio(),
+                    requestFerias.dataFinal(),
+                    listaStatus
+            );
+
+            listaTarefas.forEach(tarefa -> tarefa.setAcao(Acoes.Realocar));
+
+            listaTarefas.forEach(tarefa -> tarefa.setUsuario(substituto));
+
             tarefaRepository.saveAll(listaTarefas);
-
             usuarioRepository.save(usuario);
-            return UsuarioMapper.convertToGestorFeriasResponseDto(usuario,substituto,requestFerias.dataInicio(),requestFerias.dataFinal());
+
+            return UsuarioMapper.convertToGestorFeriasResponseDto(
+                    usuario, substituto, requestFerias.dataInicio(), requestFerias.dataFinal()
+            );
         }
+
         throw new UnauthorizedException("Apenas Gestores podem designar férias");
     }
+
 
     public UsuarioResponseDto desligarUsuario(UsuarioRequestDesligamento requestDesligamento, UserDetails userDetails){
         UsuarioModel usuario = getUsuarioModel(userDetails);

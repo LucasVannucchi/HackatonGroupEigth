@@ -61,7 +61,7 @@ public class TarefaService {
 
     public List<TarefaResponseDTO> buscarPorStatusFuncionario(UserDetails userDetails, TipoStatus status){
         UsuarioModel usuario = getUsuarioModel(userDetails);
-        List<Tarefa> tarefa = tarefaRepository.findByStatusAndUsuario(usuario,status);
+        List<Tarefa> tarefa = tarefaRepository.findByStatusAndUsuario(status, usuario);
         return TarefaMapper.toTarefaResponseDTO(tarefa);
     }
 
@@ -72,7 +72,7 @@ public class TarefaService {
 
     public List<TarefaResponseDTO> buscarPorPrioridadeFuncionario(UserDetails userDetails, TipoPrioridade prioridade){
         UsuarioModel usuario = getUsuarioModel(userDetails);
-        List<Tarefa> tarefa = tarefaRepository.findByPrioridadeAndUsuario(usuario,prioridade);
+        List<Tarefa> tarefa = tarefaRepository.findByPrioridadeAndUsuario(prioridade, usuario);
         return TarefaMapper.toTarefaResponseDTO(tarefa);
     }
 
