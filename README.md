@@ -72,7 +72,7 @@ O projeto segue o padrão **Clean Architecture**, garantindo organização, sepa
 - **Lombok**
 - **Swagger (OpenAPI 3)**
 - **Gradle**
-- **H2 / PostgreSQL (dependendo do ambiente)**
+- **H2 / MySQL (dependendo do ambiente)**
 
 ---
 
