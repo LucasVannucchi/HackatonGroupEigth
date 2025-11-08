@@ -1,6 +1,7 @@
 package com.groupEight.TaskManagement.mappers;
 
 import com.groupEight.TaskManagement.DTO.requests.usuario.UpdateUsuarioRequestDto;
+import com.groupEight.TaskManagement.DTO.requests.usuario.UsuarioResponseGetAllDto;
 import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseDto;
 import com.groupEight.TaskManagement.models.UsuarioModel;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +17,26 @@ public class UsuarioMapper {
                 model.getCargo(),
                 model.getStatus(),
                 model.getPermissoes()
+        );
+    }
+
+    public static UsuarioResponseGetAllDto convertTousuarioResponseGetAllDto (UsuarioModel model){
+        String equipe;
+        if (model.getEquipe()!= null) {
+           equipe= model.getEquipe().getNome();
+        } else {
+            equipe="Usuário não está associado a nenhuma equipe.";
+        }
+
+        return new UsuarioResponseGetAllDto(
+                model.getId(),
+                model.getNome(),
+                model.getEmail(),
+                new BCryptPasswordEncoder().encode(model.getSenha()),
+                model.getCargo(),
+                model.getStatus(),
+                model.getPermissoes(),
+                equipe
         );
     }
 

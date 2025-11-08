@@ -2,14 +2,12 @@ package com.groupEight.TaskManagement.DTO.requests.usuario;
 
 import com.groupEight.TaskManagement.enuns.UsuarioStatus;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public record UsuarioRequestFerias(
+public record UsuarioRequestDesligamento(
         String email,
         UsuarioStatus status,
-        LocalDateTime dataInicio,
-        LocalDateTime dataFinal
+        LocalDateTime dataDesligamento
 ) {
 
 }

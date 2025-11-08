@@ -1,5 +1,6 @@
 package com.groupEight.TaskManagement.repository;
 
+import com.groupEight.TaskManagement.enuns.TipoStatus;
 import com.groupEight.TaskManagement.models.Tarefa;
 import com.groupEight.TaskManagement.models.UsuarioModel;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,17 +16,30 @@ import java.util.UUID;
 public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
 
     @Query("""
-        SELECT t FROM Tarefa t
-        WHERE t.usuario.id = :usuarioId
-          AND (
-                (t.dataInicio BETWEEN :inicio AND :fim)
-                OR (t.dataFim BETWEEN :inicio AND :fim)
-                OR (t.dataInicio <= :inicio AND t.dataFim >= :fim)
-              )
-    """)
-    List<Tarefa> findTarefasDuranteFerias(
+    SELECT t
+    FROM Tarefa t
+    WHERE t.usuario.id = :usuarioId
+      AND t.dataPrevista BETWEEN :dataInicio AND :dataFim
+      AND t.status IN (:statusList)
+""")
+    List<Tarefa> findTarefasByUsuarioAndDataPrevistaBetweenAndStatusIn(
             @Param("usuarioId") UUID usuarioId,
-            @Param("inicio") LocalDateTime inicio,
-            @Param("fim") LocalDateTime fim
+            @Param("dataInicio") LocalDateTime dataInicio,
+            @Param("dataFim") LocalDateTime dataFim,
+            @Param("statusList") List<TipoStatus> statusList
+    );
+
+
+    @Query("""
+    SELECT t
+    FROM Tarefa t
+    WHERE t.usuario.id = :usuarioId
+      AND t.dataPrevista > :dataDesligamento
+      AND t.status IN (:statusList)
+""")
+    List<Tarefa> findTarefasAposDesligamentoComStatus(
+            @Param("usuarioId") UUID usuarioId,
+            @Param("dataDesligamento") LocalDateTime dataDesligamento,
+            @Param("statusList") List<TipoStatus> statusList
     );
 }
