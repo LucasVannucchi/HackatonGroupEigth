@@ -1,20 +1,21 @@
 # 🧩 TaskManagement
 
-> Sistema de Gerenciamento de Tarefas desenvolvido durante o **Hackathon**, com foco em produtividade, colaboração e controle de atividades em equipe.
+ Sistema de Gerenciamento de Tarefas desenvolvido durante o **Hackathon AgiBank**, com foco em produtividade, colaboração e controle de atividades em equipe.
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-![Java](https://img.shields.io/badge/Java-17-orange?logo=java)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?logo=springboot)
-![Spring Security](https://img.shields.io/badge/Spring%20Security-JWT-success?logo=springsecurity)
-![Gradle](https://img.shields.io/badge/Gradle-Build%20Tool-02303A?logo=gradle)
-![MySQL](https://img.shields.io/badge/MySQL-Database-blue?logo=mysql)
-![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-green?logo=swagger)
-![Postman](https://img.shields.io/badge/Postman-API%20Testing-orange?logo=postman)
-![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ%20IDEA-IDE-black?logo=intellijidea)
-![DBeaver](https://img.shields.io/badge/DBeaver-DB%20Manager-lightgrey?logo=dbeaver)
+![Java](https://img.shields.io/badge/Java-21-orange?logo=java&style=for-the-badge)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen?logo=springboot&style=for-the-badge)
+![Spring Security](https://img.shields.io/badge/Spring%20Security-JWT-success?logo=springsecurity&style=for-the-badge)
+![Gradle](https://img.shields.io/badge/Gradle-Build%20Tool-02303A?logo=gradle&style=for-the-badge)
+![MySQL](https://img.shields.io/badge/MySQL-Database-blue?logo=mysql&style=for-the-badge)
+![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-green?logo=swagger&style=for-the-badge)
+![Postman](https://img.shields.io/badge/Postman-API%20Testing-orange?logo=postman&style=for-the-badge)
+![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ%20IDEA-IDE-black?logo=intellijidea&style=for-the-badge)
+![DBeaver](https://img.shields.io/badge/DBeaver-DB%20Manager-lightgrey?logo=dbeaver&style=for-the-badge)
+
 
 ---
 
@@ -36,36 +37,35 @@ O sistema permite criar, atribuir, atualizar e acompanhar tarefas em tempo real,
 
 ---
 
-## 🗂️ Estrutura do Projeto
+:
 
-A organização segue o padrão **Clean Architecture**, garantindo separação de responsabilidades e fácil manutenção do código:
+## 🏗 Estrutura do Projeto
 
-src/
-└── main/
-    ├── java/
-    │   └── com/
-    │       └── groupEight/
-    │           └── TaskManagement/
-    │               ├── config/          # Configurações gerais (Swagger, Security, etc.)
-    │               ├── controller/      # Endpoints REST (Tarefas, Usuários, etc.)
-    │               ├── DTO/             # Objetos de transferência de dados
-    │               │   ├── requests/    # DTOs de entrada (POST, PUT)
-    │               │   └── responses/   # DTOs de saída (GET)
-    │               ├── enuns/           # Enumerações (Status, Prioridade, Ações)
-    │               ├── exception/       # Tratamento de exceções personalizadas
-    │               ├── mappers/         # Conversores entre entidades e DTOs
-    │               ├── models/          # Entidades JPA (Tarefa, Usuário, Histórico)
-    │               ├── repository/      # Interfaces de acesso ao banco de dados
-    │               ├── services/        # Regras de negócio
-    │               └── utils/           # Classes utilitárias
-    ├── resources/                       # Configurações do Spring e application.yml
-    └── test/                            # Testes automatizados
+O projeto segue o padrão **Clean Architecture**, garantindo organização, separação de responsabilidades e fácil manutenção.
+
+**Camadas e Pastas principais:**
+
+| 📁 Pasta / Pacote | 📝 Descrição |
+|------------------|-------------|
+| ⚙️ `config`       | Configurações gerais (Swagger, Security, CORS, etc.) |
+| 🚪 `controller`   | Endpoints REST (Tarefas, Usuários, etc.) |
+| 📦 `DTO`          | Objetos de Transferência de Dados (entrada e saída) |
+| 🔢 `enuns`        | Enumerações (Status, Prioridade, Ações) |
+| ❗ `exception`    | Tratamento personalizado de erros |
+| 🔄 `mappers`      | Conversão entre entidades JPA e DTOs |
+| 🏷 `models`       | Entidades JPA representando tabelas do banco de dados |
+| 💾 `repository`   | Interfaces de acesso ao banco de dados (Spring Data JPA) |
+| 🛠 `services`     | Lógica de negócio central da aplicação |
+| 🧰 `utils`        | Classes utilitárias e helpers |
+| 📁 `resources`    | Arquivos de configuração (`application.yml`, etc.) |
+| ✅ `test`         | Testes unitários e de integração |
+
 
 ---
 
 ## ⚙️ Tecnologias Utilizadas
 
-- **Java 17+**
+- **Java 21+**
 - **Spring Boot 3**
 - **Spring Security + JWT**
 - **Spring Data JPA (Hibernate)**
@@ -117,8 +117,8 @@ http://localhost:8080/swagger-ui/index.html
 | **Lucas Vannucchi** | Backend Developer |
 | **Luiz Henrique** | Backend Developer |
 | **Mauricio Zazeri** | Backend Developer |
-| **Luan Silva** | Frontend Developer |
-| **Gustavo Anjos** | UX/UI Designer |
+| **Luan Silva** | Backend Developer |
+| **Gustavo Anjos** | Backend Developer |
 
 ---
 
@@ -133,8 +133,6 @@ http://localhost:8080/swagger-ui/index.html
 
 ## 📜 Licença
 
-Este projeto foi desenvolvido exclusivamente para fins educacionais durante o hackathon e não possui fins comerciais.
+Este projeto foi desenvolvido exclusivamente para fins educacionais durante o Hackathon do AgiBank e não possui fins comerciais.
 
 ---
-
-> Feito com 💻 e ☕ pela equipe **Group Eight**
