@@ -2,8 +2,11 @@ package com.groupEight.TaskManagement.mappers;
 
 import com.groupEight.TaskManagement.DTO.requests.TarefaRequestDTO;
 import com.groupEight.TaskManagement.DTO.responses.TarefaResponseDTO;
+import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseDto;
+import com.groupEight.TaskManagement.enuns.TipoStatus;
 import com.groupEight.TaskManagement.models.Tarefa;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,11 +16,11 @@ public class TarefaMapper {
         return Tarefa.builder()
                 .titulo(tarefaRequestDTO.titulo())
                 .descricao(tarefaRequestDTO.descricao())
-                .status(tarefaRequestDTO.status())
+                .status(TipoStatus.Pendente)
                 .prioridade(tarefaRequestDTO.prioridade())
+                .dataCriacao(LocalDateTime.now())
                 .dataInicio(tarefaRequestDTO.dataInicio())
                 .dataPrevista(tarefaRequestDTO.dataPrevista())
-                .dataFim(tarefaRequestDTO.dataFim())
                 .build();
     }
 
@@ -31,18 +34,32 @@ public class TarefaMapper {
     }
 
     public static TarefaResponseDTO toTarefaResponseDTO(Tarefa tarefa){
+        UsuarioResponseDto usuarioResponseDto = null;
+
+        if (tarefa.getUsuario() != null) {
+            usuarioResponseDto = new UsuarioResponseDto(
+                    tarefa.getUsuario().getId(),
+                    tarefa.getUsuario().getNome(),
+                    tarefa.getUsuario().getEmail(),
+                    tarefa.getUsuario().getStatus(),
+                    tarefa.getUsuario().getPermissoes()
+            );
+        }
+
         return TarefaResponseDTO.builder()
                 .id(tarefa.getId())
                 .titulo(tarefa.getTitulo())
                 .descricao(tarefa.getDescricao())
-                .usuario(tarefa.getUsuario())
+                .responsavel(usuarioResponseDto) // <- pode ser null
                 .status(tarefa.getStatus())
                 .prioridade(tarefa.getPrioridade())
+                .dataCriacao(tarefa.getDataCriacao())
                 .dataInicio(tarefa.getDataInicio())
                 .dataPrevista(tarefa.getDataPrevista())
                 .dataFim(tarefa.getDataFim())
                 .build();
     }
+
 
     public static List<TarefaResponseDTO> toTarefaResponseDTO(List<Tarefa> tarefas){
         if (tarefas == null){

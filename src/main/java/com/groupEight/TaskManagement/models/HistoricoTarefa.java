@@ -46,7 +46,12 @@ public class HistoricoTarefa {
     @JoinColumn(name = "usuario_alteracao")
     private UsuarioModel usuarioAlteracao;
 
-    private String comentario;
+    private String acaoRealizada;
 
     private LocalDateTime dataAtualizacao;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tarefa_id")
+    @JsonBackReference
+    private Tarefa tarefa;
 }
