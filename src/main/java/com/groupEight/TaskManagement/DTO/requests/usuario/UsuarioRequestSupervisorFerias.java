@@ -1,15 +1,13 @@
 package com.groupEight.TaskManagement.DTO.requests.usuario;
 
-import com.groupEight.TaskManagement.enuns.Permissoes;
-import com.groupEight.TaskManagement.enuns.UsuarioStatus;
-import jakarta.validation.constraints.NotNull;
+import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseDto;
 
 import java.time.LocalDateTime;
 
 public record UsuarioRequestSupervisorFerias(
-        @NotNull String emailParaNovoSupervisor,
-        @NotNull LocalDateTime dataInicio,
-        @NotNull LocalDateTime dataFinal,
-        @NotNull Permissoes permissoes
+        String emailGestor,
+        String emailSubstituto,
+        LocalDateTime dataInicio,
+        LocalDateTime dataFinal
 ) {
 }

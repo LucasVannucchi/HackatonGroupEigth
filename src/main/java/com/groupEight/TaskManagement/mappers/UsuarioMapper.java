@@ -30,10 +30,10 @@ public class UsuarioMapper {
             LocalDateTime dataFinal
     ) {
         return new UsuarioResponseGestorFeriasDto(
-                convertToUsuarioResponseDto(gestor),
-                convertToUsuarioResponseDto(substituto),
-                dataInicio,
-                dataFinal
+                substituto.getEmail(),
+                substituto.getPermissoes(),
+                gestor.getEmail()
+
         );
     }
 
