@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TarefasRepository extends JpaRepository<Tarefa, Long> {
+public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
 }
