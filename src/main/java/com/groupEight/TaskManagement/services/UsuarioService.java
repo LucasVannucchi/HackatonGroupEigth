@@ -1,8 +1,13 @@
 package com.groupEight.TaskManagement.services;
 
-import com.groupEight.TaskManagement.DTO.responses.UsuarioResponseDto;
+import com.groupEight.TaskManagement.DTO.requests.usuario.UsuarioRequestDto;
+import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseDto;
+import com.groupEight.TaskManagement.enuns.Permissoes;
+import com.groupEight.TaskManagement.enuns.UsuarioStatus;
 import com.groupEight.TaskManagement.mappers.UsuarioMapper;
+import com.groupEight.TaskManagement.models.UsuarioModel;
 import com.groupEight.TaskManagement.repository.UsuarioRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +23,18 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
 
-    //apenas o Gestor tem a permição de dar um get allUsers, esse ,metodo vai ser puxado no controller com um ID
-
+    //metodo que vai ser usado no controller, pelo gestor, onde pega o id e confere se é um gestor ou surpervisor
     public List<UsuarioResponseDto> getAllUsers(UUID id){
-        if(usuarioRepository.existsById(id)){
+
+        Optional<UsuarioModel> usuarioEncontrado = usuarioRepository.findById(id);
+
+        if(usuarioEncontrado.isPresent() && (usuarioEncontrado.get().getPermissoes()== Permissoes.Gestor ||  usuarioEncontrado.get().getPermissoes()== Permissoes.Supervisor)){
             return usuarioRepository.findAll().stream()
                     .map(UsuarioMapper::convertToUsuarioResponseDto)
                     .toList();
         }
         return Collections.emptyList();
     }
+
 
 }

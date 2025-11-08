@@ -1,4 +1,4 @@
-package com.groupEight.TaskManagement.DTO.requests;
+package com.groupEight.TaskManagement.DTO.requests.usuario;
 
 import java.util.UUID;
 

@@ -1,6 +1,6 @@
 package com.groupEight.TaskManagement.mappers;
 
-import com.groupEight.TaskManagement.DTO.responses.UsuarioResponseDto;
+import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseDto;
 import com.groupEight.TaskManagement.models.UsuarioModel;
 
 public class UsuarioMapper {
@@ -10,7 +10,8 @@ public class UsuarioMapper {
                 model.getId(),
                 model.getNome(),
                 model.getCargo(),
-                model.getStatus()
+                model.getStatus(),
+                model.getPermissoes()
         );
     }
 }

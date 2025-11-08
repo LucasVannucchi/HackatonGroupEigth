@@ -33,6 +33,15 @@ public class UsuarioModel implements UserDetails {
     private Permissoes permissoes;
     private UsuarioStatus status;
 
+    @ManyToOne
+    @JoinColumn(name = "equipe_id")
+    private Equipe equipe;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Tarefa> tarefas;
+
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this.permissoes == Permissoes.Gestor){
