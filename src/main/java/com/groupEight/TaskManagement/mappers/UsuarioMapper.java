@@ -4,6 +4,7 @@ import com.groupEight.TaskManagement.DTO.requests.usuario.UpdateUsuarioRequestDt
 import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseGestorFeriasDto;
 import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseGetAllDto;
 import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseDto;
+import com.groupEight.TaskManagement.enuns.Permissoes;
 import com.groupEight.TaskManagement.models.UsuarioModel;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -75,7 +76,11 @@ public class UsuarioMapper {
         }
 
         if (dto.permissoes() != null) {
-            usuario.setPermissoes(dto.permissoes());
+            if(dto.permissoes() == Permissoes.Master || dto.permissoes() == Permissoes.Gestor){
+                if(usuario.getPermissoes() != Permissoes.Master && usuario.getPermissoes() != Permissoes.Gestor){
+                    throw new RuntimeException("Sem autorização!");
+                }
+            }
         }
     }
 }
