@@ -1,11 +1,9 @@
 package com.groupEight.TaskManagement.mappers;
 
 import com.groupEight.TaskManagement.DTO.requests.EquipeRequestDTO;
-import com.groupEight.TaskManagement.DTO.requests.UsuarioRequestDto;
 import com.groupEight.TaskManagement.DTO.responses.EquipeResponseDTO;
-import com.groupEight.TaskManagement.DTO.responses.UsuarioResponseDto;
+import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseDto;
 import com.groupEight.TaskManagement.models.Equipe;
-import com.groupEight.TaskManagement.models.UsuarioModel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 

@@ -5,8 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record EquipeRequestDTO(
-        @NotBlank String nome,
-        @NotNull Setor setor
+        @NotBlank(message = "Nome é obrigatório") String nome,
+        @NotNull(message = "Setor é obrigatório") Setor setor
 ){
 
 

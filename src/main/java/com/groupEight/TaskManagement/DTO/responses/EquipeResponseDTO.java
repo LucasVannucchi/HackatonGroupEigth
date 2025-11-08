@@ -1,6 +1,7 @@
 package com.groupEight.TaskManagement.DTO.responses;
 
-import com.groupEight.TaskManagement.enums.Setor;
+import com.groupEight.TaskManagement.DTO.responses.usuario.UsuarioResponseDto;
+import com.groupEight.TaskManagement.enuns.Setor;
 
 import java.util.List;
 
