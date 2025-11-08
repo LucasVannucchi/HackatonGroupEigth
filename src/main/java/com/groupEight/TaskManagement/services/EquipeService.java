@@ -1,4 +1,4 @@
-package com.groupEight.TaskManagement.service;
+package com.groupEight.TaskManagement.services;
 
 import com.groupEight.TaskManagement.DTO.requests.EquipeRequestDTO;
 import com.groupEight.TaskManagement.DTO.requests.UsuarioEmTimeDTO;
@@ -7,18 +7,15 @@ import com.groupEight.TaskManagement.enuns.StatusEquipe;
 import com.groupEight.TaskManagement.exception.EquipeNotFoundException;
 import com.groupEight.TaskManagement.exception.UnableToUpdateEquipeException;
 import com.groupEight.TaskManagement.mappers.EquipeMapper;
-import com.groupEight.TaskManagement.mappers.UsuarioMapper;
 import com.groupEight.TaskManagement.models.Equipe;
 import com.groupEight.TaskManagement.models.UsuarioModel;
 import com.groupEight.TaskManagement.repository.EquipeRepository;
 import com.groupEight.TaskManagement.repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
